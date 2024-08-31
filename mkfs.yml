@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create filesystem on device
+    community.general.filesystem:
+      
+      type: ext4
+      dev: /dev/nvme0n1
+      opts: -cc
