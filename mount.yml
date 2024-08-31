@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Mount up device by device
+    mount:
+      path: /mnt/nvme
+      src: /dev/nvme0n1
+      fstype: ext4
+      state: mounted
