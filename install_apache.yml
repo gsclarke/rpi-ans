@@ -20,3 +20,20 @@
       name: libapache2-mod-php
       state: latest
     when: ansible_distribution in ["Ubuntu", "Debian"]
+
+  - name: update the repository index for Redhat-based OS
+    dnf:
+      update-cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install lastest version of apache2 package
+    dnf:
+      name: httpd
+      state: latest
+    when: ansible_distribution == "CentOS"
+
+  - name: install latest verison of php module for apache
+    apt:
+      name: php
+      state: latest
+    when: ansible_distribution == "CentOS"
