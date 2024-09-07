@@ -4,28 +4,20 @@
   become: true
   tasks:
 
-  - name: update the repository index for Debian-like OS
-    apt:
-      update-cache: yes
-    when: ansible_distribution in ["Ubuntu", "Debian"]
-
-  - name: install lastest version of apache2 and php packages for Debian-like OS
+  - name: update the respository DB and install lastest version of apache2 and php packages for Debian-like OS
     apt:
       name: 
         - apache2
         - libapache2-mod-php
       state: latest
+      update-cache: yes
     when: ansible_distribution in ["Ubuntu", "Debian"] 
 
-  - name: update the repository index for CentOS
-    dnf:
-      update-cache: yes
-    when: ansible_distribution == "CentOS"
-
-  - name: install lastest version of apache2 and php packages for CentOS
+  - name: update the respository DB and install lastest version of apache2 and php packages for CentOS
     dnf:
       name: 
         - httpd
         - php
       state: latest
+      update-cache: yes
     when: ansible_distribution == "CentOS"
