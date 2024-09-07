@@ -1,0 +1,8 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Execute the system daemon-reload for the new FSTAB
+    ansible.builtin.command: systemctl daemon-reload
