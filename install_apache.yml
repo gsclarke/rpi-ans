@@ -5,7 +5,7 @@
   tasks:
 
   - name: update the respository DB and install lastest version of apache2 and php packages
-    apt:
+    package:
       name: 
         - "{{ apache_package }}"
         - "{{ php_package }}"
