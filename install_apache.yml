@@ -21,18 +21,18 @@
       state: latest
     when: ansible_distribution in ["Ubuntu", "Debian"]
 
-  - name: update the repository index for Redhat-based OS
+  - name: update the repository index for CentOS
     dnf:
       update-cache: yes
     when: ansible_distribution == "CentOS"
 
-  - name: install lastest version of apache2 package
+  - name: install lastest version of apache2 package for CentOS
     dnf:
       name: httpd
       state: latest
     when: ansible_distribution == "CentOS"
 
-  - name: install latest verison of php module for apache
+  - name: install latest verison of php module for apache for CentOS
     apt:
       name: php
       state: latest
