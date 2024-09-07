@@ -7,16 +7,16 @@
   - name: update the repository index for Debian-like OS
     apt:
       update-cache: yes
-    when: ansible_distribution == "Ubuntu"
+    when: ansible_distribution in ["Ubuntu", "Debian"]
 
   - name: install lastest version of apache2 package
     apt:
       name: apache2
       state: latest
-    when: when: ansible_distribution == "Ubuntu"
+    when: ansible_distribution in ["Ubuntu", "Debian"] 
 
   - name: install latest verison of php module for apache
     apt:
       name: libapache2-mod-php
       state: latest
-    when: when: ansible_distribution == "Ubuntu"
+    when: ansible_distribution in ["Ubuntu", "Debian"]
