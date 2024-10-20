@@ -18,6 +18,23 @@
       update_cache: yes
     when: ansible_distribution == "Debian"
 
+- hosts: workstations
+  become: true
+  tasks:
+
+    - name: install unzip
+      package: 
+        name: unzip
+
+    - name: install terraform
+      unarchive:
+        src: https://release.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: 0755
+        owner: root
+        group: root
+
 - hosts: web_servers
   become: true
   tasks:
@@ -38,6 +55,29 @@
         - httpd
         - php
       state: latest
+    when: ansible_distribution == "CentOS"
+
+  - name: update the httpd config file (CentOS)
+    tags: apache,apache2,httpd
+    lineinfile:
+      path: /etc/httpd/config/httpd.conf
+      regexp: '^ServerAdmin'
+      line: ServerAdmin somebody@somewhere.net
+    when: ansible_distribution == "CentOS"
+    register: httpd_conf_file
+
+  - name: restart the httpd service (CentOS)
+    tags: apache,apache2,httpd
+    service:
+      name: httpd
+      state: restarted
+    when: httpd_conf_file.changed
+
+  - name: start httpd (CentOS)
+    tags: apache,apache2,httpd
+    service:
+      name: httpd
+      state: started
     when: ansible_distribution == "CentOS"
 
   - name: copy the default website file to the web servers
