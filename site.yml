@@ -29,6 +29,12 @@
       name: simone
       groups: root
 
+  - name: add SSH key for simone user
+    tags: always
+    authorized_key:
+      user: simone
+      key: "<SSH public key hash for the user form the SSH .pub file>"
+
 
 - hosts: workstations
   become: true
