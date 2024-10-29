@@ -35,6 +35,14 @@
       user: simone
       key: "<SSH public key hash for the user form the SSH .pub file>"
 
+  - name: add user to sudoers
+    tags: always
+    copy:
+      src: sudoer_simone
+      dest: /etc/sudoers.d
+      owner: root
+      group: root
+      mode: 0440
 
 - hosts: workstations
   become: true
