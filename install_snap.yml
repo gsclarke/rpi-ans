@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update the respository DB and install lastest version of the snap package on Debian
+    apt:
+      name: 
+        - snapd
+      state: latest
+      update-cache: yes
+    when: ansible_distribution == "Debian"
+
+  - name: Enable and start the snap daemon
+    ansible.builtin.command: systemctl start snapd
+    ansible.builtin.command: systemctl enable snapd
