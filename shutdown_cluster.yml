@@ -1,0 +1,8 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Execute the system shutdown
+    ansible.builtin.command: shutdown -h +2
